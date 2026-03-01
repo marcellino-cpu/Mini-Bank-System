@@ -3,6 +3,7 @@
 #include <numeric>
 #include <cmath>
 #include <map>
+#include <unordered_map>
 #include <sstream>
 using namespace std;
 
@@ -14,7 +15,7 @@ string ID;
 double initialamount;
 
 // My extra application on bank system
-void accounts_in_the_bank(map<string, int> &mpp)
+void accounts_in_the_bank(unordered_map<string, int> &mpp)
 {
     char c;
     do
@@ -75,11 +76,12 @@ void accounts_in_the_bank(map<string, int> &mpp)
 
     } while (c == 'y' || c == 'Y');
 }
+
+
+
+
 bool withdrawall = false;
-
-
-
-void withdrawal(string ID, double value_withdrawal, map<string, int> &mpp)
+void withdrawal(string ID, double value_withdrawal, unordered_map<string, int> &mpp)
 {                            // Passing by reference (&) to avoid copying data for better performance
     auto itr = mpp.find(ID); // Here we are searching for distinct ID so it will be not good to loop on the whole map , so this is an efficient way and a fast way to find that distinct ID
     if (itr != mpp.end())
@@ -109,8 +111,10 @@ void withdrawal(string ID, double value_withdrawal, map<string, int> &mpp)
 
 
 
+
+
 bool Deposited = false;
-void Deposit(string ID, double deposit, map<string, int> &mpp)
+void Deposit(string ID, double deposit, unordered_map<string, int> &mpp)
 {
     auto itr = mpp.find(ID);
     if (itr != mpp.end())
@@ -141,7 +145,7 @@ void Deposit(string ID, double deposit, map<string, int> &mpp)
 
 
 
-void display_accounts(map<string, int> &mpp)
+void display_accounts(unordered_map<string, int> &mpp)
 {
 
     for (const auto &[ID, initialamount] : mpp)
@@ -176,6 +180,7 @@ void History(string currentID, double amount, string type, vector<string> &M)
 
 
 
+
 void History_display(const vector<string> &M)
 { // Passing by reference (&) to avoid copying data for better performance
     for (const auto &selected_value : M)
@@ -186,7 +191,7 @@ void History_display(const vector<string> &M)
 
 
 
-void search_by_ID(string ID_customer, map<string, int> &mpp)
+void search_by_ID(string ID_customer, unordered_map<string, int> &mpp)
 {
     auto itr = mpp.find(ID_customer); // One shot method
     if (itr != mpp.end())
@@ -203,7 +208,7 @@ void search_by_ID(string ID_customer, map<string, int> &mpp)
 
 
 
-//----------------------------------------------------------------------------------
+
 // University Assignment
 
 void inputdetails()
@@ -214,6 +219,7 @@ void inputdetails()
     cout << "What's the bank rate for the account type you chose? " << '\n';
     cin >> rate;
 }
+
 
 
 void yearly_amount(map<int, float> &mp)
@@ -229,6 +235,7 @@ void yearly_amount(map<int, float> &mp)
     }
 }
 
+
 float search_by_year(int year, const map<int, float> &mp)
 { // pass by value (Create a new copy of data (slower but  safe for modification))
 
@@ -243,11 +250,13 @@ float search_by_year(int year, const map<int, float> &mp)
     return 0;
 }
 
+
+
 int main()
 {
     vector<string> M;
     map<int, float> mp;
-    map<string, int> mpp;
+    unordered_map<string, int> mpp;
 
     do
     {
