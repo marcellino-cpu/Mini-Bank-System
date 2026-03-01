@@ -5,57 +5,57 @@
 #include <map>
 #include <unordered_map>
 #include <sstream>
-using namespace std;
 
 float principle = 1000;
 float rate = 0.05;
 
 char ans;
-string ID;
+std::string ID;
 double initialamount;
 
+
 // My extra application on bank system
-void accounts_in_the_bank(unordered_map<string, int> &mpp)
+void accounts_in_the_bank(std::unordered_map<std::string, int> &mpp)
 {
     char c;
     do
     {
-        cout << "Please enter a new account ID : (positive numbers , letters only ) " << '\n';
-        cin >> ID;
+        std::cout << "Please enter a new account ID : (positive numbers , letters only ) " << '\n';
+        std::cin >> ID;
         for (int i = 0; i < ID.length(); i++)
         {
             if (ID[i] == '-')
             {
-                cout << "Invalid ID ! please enter Positive numbers or letters only " << '\n';
-                cin >> ID;
+                std::cout << "Invalid ID ! please enter Positive numbers or letters only " << '\n';
+                std::cin >> ID;
             }
         }
 
-        cout << "Enter the initial amount to deposit " << '\n';
-        cin >> initialamount;
+        std::cout << "Enter the initial amount to deposit " << '\n';
+        std::cin >> initialamount;
         do
         {
 
             if (initialamount < 0)
             {
-                cout << "Invalid value ! , please enter positive number " << '\n';
-                cin >> initialamount;
+                std::cout << "Invalid value ! , please enter positive number " << '\n';
+                std::cin >> initialamount;
             }
         } while (initialamount < 0);
 
         auto result = mpp.insert({ID, initialamount});
         if (result.second == false)
         {
-            cout << "This ID was taken by another customer ! Please new ID " << '\n';
+            std::cout << "This ID was taken by another customer ! Please new ID " << '\n';
         }
         else
         {
-            cout << "Account " << ID << " has been created successfuly " << '\n';
+            std::cout << "Account " << ID << " has been created successfuly " << '\n';
         }
-        cout << "====================================================" << '\n';
-        cout << "====================================================" << '\n';
-        cout << "Do you want to create a new account ? (Y/N)" << '\n';
-        cin >> c;
+        std::cout << "====================================================" << '\n';
+        std::cout << "====================================================" << '\n';
+        std::cout << "Do you want to create a new account ? (Y/N)" << '\n';
+        std::cin >> c;
         if (c == 'y' || c == 'Y')
         {
             continue;
@@ -68,8 +68,8 @@ void accounts_in_the_bank(unordered_map<string, int> &mpp)
         {
             if (c != 'Y' && c != 'y' && c != 'N' && c != 'n')
             {
-                cout << "Please enter (Y , y for YES) or (N , n for NO)" << '\n';
-                cin >> c;
+                std::cout << "Please enter (Y , y for YES) or (N , n for NO)" << '\n';
+                std::cin >> c;
                 continue;
             }
         } while (c != 'Y' && c != 'y' && c != 'N' && c != 'n');
@@ -79,9 +79,8 @@ void accounts_in_the_bank(unordered_map<string, int> &mpp)
 
 
 
-
 bool withdrawall = false;
-void withdrawal(string ID, double value_withdrawal, unordered_map<string, int> &mpp)
+void withdrawal(std::string ID, double value_withdrawal, std::unordered_map<std::string, int> &mpp)
 {                            // Passing by reference (&) to avoid copying data for better performance
     auto itr = mpp.find(ID); // Here we are searching for distinct ID so it will be not good to loop on the whole map , so this is an efficient way and a fast way to find that distinct ID
     if (itr != mpp.end())
@@ -89,32 +88,31 @@ void withdrawal(string ID, double value_withdrawal, unordered_map<string, int> &
         if (itr->second >= value_withdrawal)
         {
             double x = itr->second - value_withdrawal;
-            cout << "=============================" << '\n';
-            cout << "Your current balance is " << x << '\n';
-            cout << "Success withdrawal process " << '\n';
-            cout << "=============================" << '\n';
+            std::cout << "=============================" << '\n';
+            std::cout << "Your current balance is " << x << '\n';
+            std::cout << "Success withdrawal process " << '\n';
+            std::cout << "=============================" << '\n';
             itr->second = x;
             withdrawall = true;
         }
         else
         {
-            cout << "Insufficient funds ! current balance is " << itr->second << '\n';
+            std::cout << "Insufficient funds ! current balance is " << itr->second << '\n';
         }
     }
     else
     {
-        cout << "The account is not found , or not created ." << '\n';
+        std::cout << "The account is not found , or not created ." << '\n';
 
-        cout << "(You can create a new account by pressing  4) " << '\n';
+        std::cout << "(You can create a new account by pressing  4) " << '\n';
     }
 }
 
 
 
 
-
 bool Deposited = false;
-void Deposit(string ID, double deposit, unordered_map<string, int> &mpp)
+void Deposit(std::string ID, double deposit, std::unordered_map<std::string, int> &mpp)
 {
     auto itr = mpp.find(ID);
     if (itr != mpp.end())
@@ -122,56 +120,57 @@ void Deposit(string ID, double deposit, unordered_map<string, int> &mpp)
         if (deposit >= 0)
         {
             double y = itr->second + deposit;
-            cout << "=============================" << '\n';
-            cout << "Your current balance is " << y << '\n';
-            cout << "Success withdrawal process " << '\n';
-            cout << "=============================" << '\n';
+            std::cout << "=============================" << '\n';
+            std::cout << "Your current balance is " << y << '\n';
+            std::cout << "Success withdrawal process " << '\n';
+            std::cout << "=============================" << '\n';
             itr->second = y;
             Deposited = true;
         }
         else
         {
-            cout << "Insufficient funds ! please enter a positive number" << '\n';
+            std::cout << "Insufficient funds ! please enter a positive number" << '\n';
         }
     }
     else
     {
-        cout << "The account is not found , or not created ." << '\n';
+        std::cout << "The account is not found , or not created ." << '\n';
 
-        cout << "(You can create a new account by pressing  4) " << '\n';
+        std::cout << "(You can create a new account by pressing  4) " << '\n';
     }
 }
 
 
 
 
-void display_accounts(unordered_map<string, int> &mpp)
+
+void display_accounts(std::unordered_map<std::string, int> &mpp)
 {
 
     for (const auto &[ID, initialamount] : mpp)
     { // modern way to loop on a map
-        cout << "ID account number" << '\t' << "       Balance" << '\n';
-        cout << ID << '\t' << '\t' << '\t' << '\t' << initialamount << '\n';
+        std::cout << "ID account number" << '\t' << "       Balance" << '\n';
+        std::cout << ID << '\t' << '\t' << '\t' << '\t' << initialamount << '\n';
     }
 }
 
 
 
 
-void History(string currentID, double amount, string type, vector<string> &M)
+void History(std::string currentID, double amount, std::string type, std::vector<std::string> &M)
 {
 
     if (Deposited)
     {
 
-        stringstream ss;
+        std::stringstream ss;
         ss << "ID : " << currentID << " | " << type << " : " << amount << '\n';
         M.push_back(ss.str());
         Deposited = false;
     }
     if (withdrawall)
     {
-        stringstream sp;
+        std::stringstream sp;
         sp << "ID : " << currentID << "| " << type << " : " << amount << '\n';
         M.push_back(sp.str());
         withdrawall = false;
@@ -180,31 +179,32 @@ void History(string currentID, double amount, string type, vector<string> &M)
 
 
 
-
-void History_display(const vector<string> &M)
+void History_display(const std::vector<std::string> &M)
 { // Passing by reference (&) to avoid copying data for better performance
     for (const auto &selected_value : M)
     { // Modern way to loop and display
-        cout << selected_value << '\n';
+        std::cout << selected_value << '\n';
     }
 }
 
 
 
-void search_by_ID(string ID_customer, unordered_map<string, int> &mpp)
+
+void search_by_ID(std::string ID_customer, std::unordered_map<std::string, int> &mpp)
 {
     auto itr = mpp.find(ID_customer); // One shot method
     if (itr != mpp.end())
     {
-        cout << "Customer's current balance is " << itr->second << '\n';
+        std::cout << "Customer's current balance is " << itr->second << '\n';
     }
     else
     {
-        cout << "The account is not found , or not created ." << '\n';
+        std::cout << "The account is not found , or not created ." << '\n';
 
-        cout << "(You can create a new account by pressing  4) " << '\n';
+        std::cout << "(You can create a new account by pressing  4) " << '\n';
     }
 }
+
 
 
 
@@ -214,32 +214,36 @@ void search_by_ID(string ID_customer, unordered_map<string, int> &mpp)
 void inputdetails()
 {
 
-    cout << "Please enter the principle amount you want to deposit : " << '\n';
-    cin >> principle;
-    cout << "What's the bank rate for the account type you chose? " << '\n';
-    cin >> rate;
+    std::cout << "Please enter the principle amount you want to deposit : " << '\n';
+    std::cin >> principle;
+    std::cout << "What's the bank rate for the account type you chose? " << '\n';
+    std::cin >> rate;
 }
 
 
 
-void yearly_amount(map<int, float> &mp)
+
+void yearly_amount(std::map<int, float> &mp)
 {
 
-    cout << "Year " << " " << " Amount on deposit " << '\n';
+    std::cout << "Year " << " " << " Amount on deposit " << '\n';
     for (int years = 1; years <= 10; years++)
     {
         float amount = principle * pow(1.0 + rate, years);
         mp.insert({years, amount});
 
-        cout << years << "              " << amount << '\n';
+        std::cout << years << "              " << amount << '\n';
     }
 }
 
 
-float search_by_year(int year, const map<int, float> &mp)
+
+
+
+float search_by_year(int year, const std::map<int, float> &mp)
 { // pass by value (Create a new copy of data (slower but  safe for modification))
 
-    map<int, float>::const_iterator itr; // classic way to loop on a map , compiler gives erorr when writing (::itreator only) as itreators has the access to edit on map and this is not acceptable when writing const in function's parameter
+    std::map<int, float>::const_iterator itr; // classic way to loop on a map , compiler gives erorr when writing (::itreator only) as itreators has the access to edit on map and this is not acceptable when writing const in function's parameter
     for (itr = mp.begin(); itr != mp.end(); itr++)
     {
         if (itr->first == year)
@@ -252,34 +256,37 @@ float search_by_year(int year, const map<int, float> &mp)
 
 
 
+
+
+
 int main()
 {
-    vector<string> M;
-    map<int, float> mp;
-    unordered_map<string, int> mpp;
+    std::vector<std::string> storing_History;
+    std::map<int, float> Storing_years;
+    std::unordered_map<std::string, int> Storing_accounts;
 
     do
     {
-        cout << "Welcome to mini bank project " << '\n';
-        cout << "*****************************" << '\n';
+        std::cout << "Welcome to mini bank project " << '\n';
+        std::cout << "*****************************" << '\n';
 
-        cout << "(University Assignment requirements) " << '\n';
-        cout << "press" << '\n';
-        cout << "1 to input account details " << '\n';
-        cout << "2 to display yearly amount for 10 years " << '\n';
-        cout << "3 to display the amount at a certain speecified year " << '\n';
-        cout << "------------------------------------------------" << '\n';
-        cout << "(My extra application on bank system)" << '\n';
-        cout << "4 add new account to the bank " << '\n';
-        cout << "5 make a Withdraw process" << '\n';
-        cout << "6 make a deposit process " << '\n';
-        cout << "7 Display accounts found in the bank" << '\n';
-        cout << "8 Display successful Transactions History " << '\n';
-        cout << "9 Search for an account by customer's ID " << '\n';
-        cout << "=====================================================" << '\n';
-        cout << " Enter your choice : " << '\n';
+        std::cout << "(University Assignment requirements) " << '\n';
+        std::cout << "press" << '\n';
+        std::cout << "1 to input account details " << '\n';
+        std::cout << "2 to display yearly amount for 10 years " << '\n';
+        std::cout << "3 to display the amount at a certain speecified year " << '\n';
+        std::cout << "------------------------------------------------" << '\n';
+        std::cout << "(My extra application on bank system)" << '\n';
+        std::cout << "4 add new account to the bank " << '\n';
+        std::cout << "5 make a Withdraw process" << '\n';
+        std::cout << "6 make a deposit process " << '\n';
+        std::cout << "7 Display accounts found in the bank" << '\n';
+        std::cout << "8 Display successful Transactions History " << '\n';
+        std::cout << "9 Search for an account by customer's ID " << '\n';
+        std::cout << "=====================================================" << '\n';
+        std::cout << " Enter your choice : " << '\n';
         char no;
-        cin >> no;
+        std::cin >> no;
         switch (no)
         {
         case '1':
@@ -289,89 +296,89 @@ int main()
 
         case '2':
 
-            yearly_amount(mp);
+            yearly_amount(Storing_years);
             break;
 
         case '3':
 
             int year;
-            cout << "Enter the year you want to display the amount reached at : ";
-            cin >> year;
-            cout << " Amount :" << search_by_year(year, mp) << '\n';
+            std::cout << "Enter the year you want to display the amount reached at : ";
+            std::cin >> year;
+            std::cout << " Amount :" << search_by_year(year, Storing_years) << '\n';
             break;
 
         case '4':
 
-            accounts_in_the_bank(mpp);
+            accounts_in_the_bank(Storing_accounts);
             break;
 
         case '5':
         {
             double value_withdrawal;
-            cout << "Enter the ID account you want to withdrawal from " << '\n';
-            cin >> ID;
-            cout << "Enter the value you want to withdraw : " << '\n';
-            cin >> value_withdrawal;
+            std::cout << "Enter the ID account you want to withdrawal from " << '\n';
+            std::cin >> ID;
+            std::cout << "Enter the value you want to withdraw : " << '\n';
+            std::cin >> value_withdrawal;
             do
             {
 
                 if (value_withdrawal < 0)
                 {
-                    cout << "Invalid value ! Please enter a positive value " << '\n';
-                    cin >> value_withdrawal;
+                    std::cout << "Invalid value ! Please enter a positive value " << '\n';
+                    std::cin >> value_withdrawal;
                     continue;
                 }
             } while (value_withdrawal < 0);
 
-            withdrawal(ID, value_withdrawal, mpp);
-            History(ID, value_withdrawal, "Withdrawal", M); // Capture ID and sent it to History() function and capture the withdrawal transaction details into the history vector
+            withdrawal(ID, value_withdrawal, Storing_accounts);
+            History(ID, value_withdrawal, "Withdrawal", storing_History); // Capture ID and sent it to History() function and capture the withdrawal transaction details into the history vector
             break;
         }
 
         case '6':
         {
             double deposit;
-            cout << "Enter ID " << '\n';
-            cin >> ID;
-            cout << "Enter the amount you want to deposit " << '\n';
-            cin >> deposit;
-            Deposit(ID, deposit, mpp);
-            History(ID, deposit, "Deposit", M); // Capture ID and sent it to History function and capture the deposit transaction details into the history vector
+            std::cout << "Enter ID " << '\n';
+            std::cin >> ID;
+            std::cout << "Enter the amount you want to deposit " << '\n';
+            std::cin >> deposit;
+            Deposit(ID, deposit, Storing_accounts);
+            History(ID, deposit, "Deposit", storing_History); // Capture ID and sent it to History function and capture the deposit transaction details into the history vector
             break;
         }
 
         case '7':
-            display_accounts(mpp);
+            display_accounts(Storing_accounts);
             break;
 
         case '8':
 
-            History_display(M);
+            History_display(storing_History);
             break;
 
         case '9':
         {
-            cout << "Enter customer's ID to search  " << '\n';
-            string id;
-            cin >> id;
-            search_by_ID(id, mpp);
+            std::cout << "Enter customer's ID to search  " << '\n';
+            std::string id;
+            std::cin >> id;
+            search_by_ID(id, Storing_accounts);
             break;
         }
         default:
-            cout << "Invalid choice ! please re-enter the correct one " << '\n';
+            std::cout << "Invalid choice ! please re-enter the correct one " << '\n';
             continue;
         }
-        cout << "******************************" << '\n';
-        cout << "Another opertion ? (Y/N) : " << '\n';
+        std::cout << "******************************" << '\n';
+        std::cout << "Another opertion ? (Y/N) : " << '\n';
 
-        cin >> ans;
+        std::cin >> ans;
 
         do
         {
             if (ans != 'Y' && ans != 'y' && ans != 'N' && ans != 'n')
             {
-                cout << "Please enter (Y , y for YES) or (N , n for NO)" << '\n';
-                cin >> ans;
+                std::cout << "Please enter (Y , y for YES) or (N , n for NO)" << '\n';
+                std::cin >> ans;
                 continue;
             }
         } while (ans != 'Y' && ans != 'y' && ans != 'N' && ans != 'n');
@@ -383,7 +390,7 @@ int main()
 
         if (ans == 'N' || ans == 'n')
         {
-            cout << "Thank you for using our application" << '\n';
+            std::cout << "Thank you for using our application" << '\n';
             break;
         }
 
