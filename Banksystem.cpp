@@ -76,7 +76,10 @@ void accounts_in_the_bank(map<string, int> &mpp)
     } while (c == 'y' || c == 'Y');
 }
 bool withdrawall = false;
-void withdrawal(const string &ID, const double &value_withdrawal, map<string, int> &mpp)
+
+
+
+void withdrawal(string ID, double value_withdrawal, map<string, int> &mpp)
 {                            // Passing by reference (&) to avoid copying data for better performance
     auto itr = mpp.find(ID); // Here we are searching for distinct ID so it will be not good to loop on the whole map , so this is an efficient way and a fast way to find that distinct ID
     if (itr != mpp.end())
@@ -104,8 +107,10 @@ void withdrawal(const string &ID, const double &value_withdrawal, map<string, in
     }
 }
 
+
+
 bool Deposited = false;
-void Deposit(const string &ID, const double &deposit, map<string, int> &mpp)
+void Deposit(string ID, double deposit, map<string, int> &mpp)
 {
     auto itr = mpp.find(ID);
     if (itr != mpp.end())
@@ -133,6 +138,9 @@ void Deposit(const string &ID, const double &deposit, map<string, int> &mpp)
     }
 }
 
+
+
+
 void display_accounts(map<string, int> &mpp)
 {
 
@@ -143,7 +151,10 @@ void display_accounts(map<string, int> &mpp)
     }
 }
 
-void History(const string &currentID, const double &amount, const string &type, vector<string> &M)
+
+
+
+void History(string currentID, double amount, string type, vector<string> &M)
 {
 
     if (Deposited)
@@ -162,6 +173,9 @@ void History(const string &currentID, const double &amount, const string &type, 
         withdrawall = false;
     }
 }
+
+
+
 void History_display(const vector<string> &M)
 { // Passing by reference (&) to avoid copying data for better performance
     for (const auto &selected_value : M)
@@ -169,6 +183,8 @@ void History_display(const vector<string> &M)
         cout << selected_value << '\n';
     }
 }
+
+
 
 void search_by_ID(string ID_customer, map<string, int> &mpp)
 {
@@ -185,6 +201,9 @@ void search_by_ID(string ID_customer, map<string, int> &mpp)
     }
 }
 
+
+
+//----------------------------------------------------------------------------------
 // University Assignment
 
 void inputdetails()
@@ -195,6 +214,7 @@ void inputdetails()
     cout << "What's the bank rate for the account type you chose? " << '\n';
     cin >> rate;
 }
+
 
 void yearly_amount(map<int, float> &mp)
 {
@@ -359,4 +379,6 @@ int main()
         }
 
     } while (ans == 'Y' || ans == 'y');
+
+    return 0;
 }
