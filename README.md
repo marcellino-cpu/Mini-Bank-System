@@ -42,11 +42,17 @@ However, I took the initiative to expand the assignment into a fully functional 
 🛠️ Technical Implementation & Optimization
 
 To enhance performance and move beyond traditional arrays, the system uses advanced STL containers:
+🔹unordered_map<int, AccoundData> mpp
 
-🔹 "map<int, AccountData>"
+- Ensures efficient account lookup with O(1) time complexity for faster access by Customer's ID .
+- Initially , "map<int, AccountData>" was considered , which provides O(log n) lookup time and maintains elements in sorted order . However , since this system performs frequent account lookups by ID and does not require sorted traversal , unordered map was chosen as a more efficient allternative.
 
-- Ensures efficient account lookup with O(log n) time complexity.
+  
+🔹 "map<int, int>" mp
 
+- Used to store yearly data with O(log n) lookup complexity.
+In this case, maintaining the elements in sorted order by year is required for structured traversal and chronological display. Therefore, std::map was chosen instead of std::unordered_map, as it guarantees ordered storage of elements.
+  
 🔹 High-Speed Searching
 
 - Implemented using the Single-Shot Technique:
