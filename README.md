@@ -33,22 +33,27 @@ However, I took the initiative to expand the assignment into a fully functional 
 
 - Prevents:
   - Negative deposits or withdrawals
-  - Duplicate Customer IDs or negative ISs .
-  - Invalid inputs for questions and also .
+  - Duplicate Customer IDs or negative IDs .
+  - Invalid inputs for questions .
   - searching about a non-existing account or deposit or withdrawal from a non-exsiting account .
 
 ---
 
 🛠️ Technical Implementation & Optimization
 
+
+Code cleanliness :Removing using namespace std; and switched to explicict std:: namespacing to avoid naming collisions.
+
 To enhance performance and move beyond traditional arrays, the system uses advanced STL containers:
-🔹unordered_map<int, AccoundData> mpp
+
+
+🔹std::unordered_map<std::string, AccoundData> Stored_accounts
 
 - Ensures efficient account lookup with O(1) time complexity for faster access by Customer's ID .
-- Initially , "map<int, AccountData>" was considered , which provides O(log n) lookup time and maintains elements in sorted order . However , since this system performs frequent account lookups by ID and does not require sorted traversal , unordered map was chosen as a more efficient allternative.
+- Initially , "std::map<std::string, AccountData>" was considered , which provides O(log n) lookup time and maintains elements in sorted order . However , since this system performs frequent account lookups by ID and does not require sorted traversal , unordered map was chosen as a more efficient allternative.
 
   
-🔹 "map<int, float>" mp
+🔹 "std::map<int, float>" Stored_years 
 
 - Used to store yearly data with O(log n) lookup complexity.
 In this case, maintaining the elements in sorted order by year is required for structured traversal and chronological display. Therefore, std::map was chosen instead of std::unordered_map, as it guarantees ordered storage of elements.
@@ -56,7 +61,7 @@ In this case, maintaining the elements in sorted order by year is required for s
 🔹 High-Speed Searching
 
 - Implemented using the Single-Shot Technique:
-
+"auto itr = find.accounts()"
 "if (itr != accounts.end())"
 
 This avoids unnecessary looping and enables instant access to account data.
@@ -66,16 +71,20 @@ Modern C++ Techniques & Optimization
 
 - ​The project utilizes advanced C++ standards to ensure memory efficiency and high execution speed:
 ​Passing by Reference for maps and vectors :
+
 1 - ​Used in all major functions to prevent unnecessary Deep Copying .
 2 - ​Significantly reduces CPU overhead and memory consumption during account lookups.
 
+
 - ​Classical Iterators(in maps) : For precise control over STL containers .
+
 
 - ​Range-Based Loops(maps):
 for (const auto& account : accounts).
 
 
 - ​Const Correctness: Applied to function parameters to ensure data integrity and prevent accidental modification of customer records.
+
 
 ** And when needed to modify the vector M in History_display function 
 Const is removed .
