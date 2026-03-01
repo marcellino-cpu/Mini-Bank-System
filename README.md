@@ -48,7 +48,7 @@ To enhance performance and move beyond traditional arrays, the system uses advan
 - Initially , "map<int, AccountData>" was considered , which provides O(log n) lookup time and maintains elements in sorted order . However , since this system performs frequent account lookups by ID and does not require sorted traversal , unordered map was chosen as a more efficient allternative.
 
   
-🔹 "map<int, int>" mp
+🔹 "map<int, float>" mp
 
 - Used to store yearly data with O(log n) lookup complexity.
 In this case, maintaining the elements in sorted order by year is required for structured traversal and chronological display. Therefore, std::map was chosen instead of std::unordered_map, as it guarantees ordered storage of elements.
